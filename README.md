@@ -43,13 +43,19 @@ This project is the **Producer**, sending simulated delivery-boy location update
 
 ## Kafka Setup Steps (KRaft – No ZooKeeper)
 
-### 1. Format Kafka Storage
+### 1.Generate a Cluster UUID
+
+```bash
+KAFKA_CLUSTER_ID="$(bin/kafka-storage.sh random-uuid)"
+```
+
+### 2. Format Kafka Storage
 
 ```bash
 bin/kafka-storage.sh format -t $(bin/kafka-storage.sh random-uuid) -c config/kraft/server.properties
 ```
 
-###  2. Start Kafka Server
+###  3. Start Kafka Server
 ```bash
 bin/kafka-server-start.sh config/server.properties
 ```
