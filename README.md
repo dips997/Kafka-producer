@@ -1,27 +1,56 @@
-# 🚚 DeliveryBoy – Kafka Producer Service
+# Kafka Producer – DeliveryBoy Service
 
-This Spring Boot application acts as a Kafka **producer** that simulates real-time location updates for a delivery agent. It sends thousands of random coordinates to a Kafka topic.
-
----
-
-## 📌 Purpose
-
-This is part of a Kafka-based system to demonstrate how a microservice can produce location data that gets consumed by another service (like `enduser`).
+This is a Spring Boot-based **Kafka Producer service** that simulates sending real-time location updates for a delivery boy. It pushes the data into a Kafka topic which can then be consumed by another microservice (like a consumer).
 
 ---
 
-## 🧱 Tech Stack
+## Purpose
+
+This service demonstrates how a Kafka **Producer** works in a microservice setup using Spring Boot. It sends random location coordinates to a Kafka topic called `location-update-topic`.
+
+The data can be consumed by a separate **Kafka Consumer** (like `enduser`) which listens to this topic.
+
+---
+
+## Tech Stack
 
 - Java
 - Spring Boot
-- Apache Kafka (tested with version 4.0.0 using KRaft mode)
+- Apache Kafka (v4.0.0 using KRaft mode)
+- Spring Kafka
 - REST API
 
 ---
 
-## 🚀 Kafka Setup Steps (KRaft Mode – No ZooKeeper)
+## Kafka Concept (Producer Side)
 
-### 1️⃣ Format Kafka Storage
+In Kafka terms:
+> A **Producer** is an application that **writes (sends) messages to a Kafka topic**.  
+> A **Consumer** listens to that topic and **reads those messages**.
+
+This project is the **Producer**, sending simulated delivery-boy location updates to the topic `location-update-topic`.
+
+---
+
+## Kafka Producer Flow Summary
+
+### 1. You call the REST endpoint `/location/update`  
+### 2. It generates 200,000 random coordinates  
+### 3. It sends each coordinate as a message to Kafka topic `location-update-topic`  
+### 4. A consumer (e.g. `enduser`) receives and logs the messages
+
+---
+
+## Kafka Setup Steps (KRaft – No ZooKeeper)
+
+### 1. Format Kafka Storage
 
 ```bash
 bin/kafka-storage.sh format -t $(bin/kafka-storage.sh random-uuid) -c config/kraft/server.properties
+```
+
+###  2. Start Kafka Server
+```bash
+bin/kafka-server-start.sh config/server.properties
+```
+
