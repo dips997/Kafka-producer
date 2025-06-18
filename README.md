@@ -58,7 +58,7 @@ bin/kafka-server-start.sh config/server.properties
 ### 1. Open Postman
 ### 2. Click "New" > HTTP Request
 ### 3. Select POST method
-### 4. 
+### 4. http localhost url
 ```bash
     http://localhost:8080/location/update
 ```
