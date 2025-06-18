@@ -22,14 +22,22 @@ The data can be consumed by a separate **Kafka Consumer** (like `enduser`) which
 
 ---
 
-## Kafka Concept (Producer Side)
+## Test the Kafka Producer API using Postman
 
-In Kafka terms:
-> A **Producer** is an application that **writes (sends) messages to a Kafka topic**.  
-> A **Consumer** listens to that topic and **reads those messages**.
-
-This project is the **Producer**, sending simulated delivery-boy location updates to the topic `location-update-topic`.
-
+### 1. Open Postman
+### 2. Click "New" > HTTP Request
+### 3. Select POST method
+### 4. 
+```bash
+    http://localhost:8080/location/update
+```
+### 5. Click "Send"
+### 6. Response will look like:
+```bash
+{
+  "message": "location updated"
+}
+```
 ---
 
 ## Kafka Producer Flow Summary
@@ -60,3 +68,10 @@ bin/kafka-storage.sh format -t $(bin/kafka-storage.sh random-uuid) -c config/kra
 bin/kafka-server-start.sh config/server.properties
 ```
 
+## Kafka Concept (Producer Side)
+
+In Kafka terms:
+> A **Producer** is an application that **writes (sends) messages to a Kafka topic**.  
+> A **Consumer** listens to that topic and **reads those messages**.
+
+This project is the **Producer**, sending simulated delivery-boy location updates to the topic `location-update-topic`.
